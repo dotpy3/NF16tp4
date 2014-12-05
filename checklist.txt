@@ -1,0 +1,10 @@
+A. STRUCTURE DE DONNEES
+- structure Position : OK
+- structure ListePosition : OK
+- structure NoeudABR : OK
+- structure ArbreBR : OK
+
+B. Fonctions à implémenter
+- creer_liste_positions : OK
+- ajouter_position : OK (à tester)
+- creer_abr : OK
