@@ -7,13 +7,13 @@ ArbreBR *creer_abr() {
 	/* Cr�� un nouvel ABR vide.
        Retourne un pointeur vers celui-ci ou NULL en cas d'�chec. */
 
-	ArbreBR *abr = (ArbreBR *)malloc(sizeof(ArbreBR));
+	ArbreBR *arbre = (ArbreBR *)malloc(sizeof(ArbreBR));
 
 	if (abr != NULL) {
 		arbre->nb_mots_differents = 0;
 		arbre->nb_mots_total      = 0;
 		arbre->racine             = NULL;
-		return abr;
+		return arbre;
 	}
 
 	return NULL;
