@@ -10,9 +10,9 @@ ArbreBR *creer_abr() {
 	ArbreBR *abr = (ArbreBR *)malloc(sizeof(ArbreBR));
 
 	if (abr != NULL) {
-		abr->nb_mots_differents = 0;
-		abr->nb_mots_total      = 0;
-		abr->racine             = NULL;
+		arbre->nb_mots_differents = 0;
+		arbre->nb_mots_total      = 0;
+		arbre->racine             = NULL;
 		return abr;
 	}
 
@@ -24,20 +24,7 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 		return 0; // Cas où l'arbre ou le mot ne sont pas définis
 
 
-	// AJOUT DU NŒUD DANS LA MEMOIRE
-	NoeudABR* noeudAAdd=(NoeudABR*)malloc(sizeof(NoeudABR));
-		// Ce nœud est le nœud qu'on veut ajouter.
-	if (noeudAAdd==NULL) return 0;
-		// On crée le nœud qu'on veut ajouter.
-	noeudAAdd->mot = mot;
-	noeudAAdd->filsGauche=NULL;
-	noeudAAdd->filsDroit=NULL;
 
-	// On crée la liste des positions.
-
-	ListePosition* listePosN=creer_liste_positions();
-	if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
-	noeudAAdd->positions=*listePosN;
 
 	// AJOUT DU NŒUD DANS L'ARBRE DE RECHERCHE
 
@@ -45,8 +32,23 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 
 	if (arbre->racine == NULL){
 
-		abr->nb_mots_differents++;
-		abr->nb_mots_total++;
+		// AJOUT DU NŒUD DANS LA MEMOIRE
+		NoeudABR* noeudAAdd=(NoeudABR*)malloc(sizeof(NoeudABR));
+			// Ce nœud est le nœud qu'on veut ajouter.
+		if (noeudAAdd==NULL) return 0;
+			// On crée le nœud qu'on veut ajouter.
+		noeudAAdd->mot = mot;
+		noeudAAdd->filsGauche=NULL;
+		noeudAAdd->filsDroit=NULL;
+
+		// On crée la liste des positions.
+
+		ListePosition* listePosN=creer_liste_positions();
+		if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
+		noeudAAdd->positions=*listePosN;
+
+		arbre->nb_mots_differents++;
+		arbre->nb_mots_total++;
 		arbre->racine = noeudAAdd;
 		return 1;
 	}
@@ -55,20 +57,74 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 
 	struct NoeudABR *iter=arbre->racine;
 	do{
+		// On rentre dans une boucle avec iter qui parcourt tous les éléments de l'arbre.
+		// Lorsqu'on a fini, on met iter à null pour signifier la fin de la boucle.
+
 		if (strcmp(iter->mot,mot) == 0){
 			// alors il y a déjà une occurence du mot dans l'arbre
-			ajouter_position(iter->positions,ligne,ordre)
+			ajouter_position(iter->positions,ligne,ordre);
+			arbre->nb_mots_total++;
+			iter=NULL;
 		} else if (strcmp(iter->mot,mot) < 0){
-			if (iter->filsGauche != NULL) iter=iter->filsGauche;
-			else{
-				abr->nb_mots_differents++;
+			// si le nouveau mot est situé avant le suivant
 
-				abr->nb_mots_total++;
+			if (iter->filsGauche != NULL) iter=iter->filsGauche;
+
+			else{
+
+				// AJOUT DU NŒUD DANS LA MEMOIRE
+				NoeudABR* noeudAAdd=(NoeudABR*)malloc(sizeof(NoeudABR));
+					// Ce nœud est le nœud qu'on veut ajouter.
+				if (noeudAAdd==NULL) return 0;
+					// On crée le nœud qu'on veut ajouter.
+				noeudAAdd->mot = mot;
+				noeudAAdd->filsGauche=NULL;
+				noeudAAdd->filsDroit=NULL;
+
+				// On crée la liste des positions.
+
+				ListePosition* listePosN=creer_liste_positions();
+				if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
+				noeudAAdd->positions=*listePosN;
+
+				arbre->nb_mots_differents++;
+
+				arbre->nb_mots_total++;
+				iter->filsGauche=noeudAAdd;
+				iter=NULL;
 			}
 		} else if (strcmp(iter->mot,mot) > 0){
 
+			if (iter->filsDroit != NULL) iter=iter->filsDroit;
+
+			else{
+
+				// AJOUT DU NŒUD DANS LA MEMOIRE
+				NoeudABR* noeudAAdd=(NoeudABR*)malloc(sizeof(NoeudABR));
+					// Ce nœud est le nœud qu'on veut ajouter.
+				if (noeudAAdd==NULL) return 0;
+					// On crée le nœud qu'on veut ajouter.
+				noeudAAdd->mot = mot;
+				noeudAAdd->filsGauche=NULL;
+				noeudAAdd->filsDroit=NULL;
+
+				// On crée la liste des positions.
+
+				ListePosition* listePosN=creer_liste_positions();
+				if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
+				noeudAAdd->positions=*listePosN;
+
+				arbre->nb_mots_differents++;
+
+				arbre->nb_mots_total++;
+				iter->filsDroit=noeudAAdd;
+				iter=NULL;
+			}
+
 		} else return 0;
 	}while(iter!=NULL);
+
+	return 1;
 }
 /*
 int main()
