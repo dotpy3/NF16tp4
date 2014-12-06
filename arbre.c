@@ -9,7 +9,7 @@ ArbreBR *creer_abr() {
 
 	ArbreBR *arbre = (ArbreBR *)malloc(sizeof(ArbreBR));
 
-	if (abr != NULL) {
+	if (arbre != NULL) {
 		arbre->nb_mots_differents = 0;
 		arbre->nb_mots_total      = 0;
 		arbre->racine             = NULL;
@@ -19,7 +19,7 @@ ArbreBR *creer_abr() {
 	return NULL;
 }
 
-int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
+int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase){
 	if (arbre == NULL || mot == NULL)
 		return 0; // Cas où l'arbre ou le mot ne sont pas définis
 
@@ -44,7 +44,7 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 		// On crée la liste des positions.
 
 		ListePosition* listePosN=creer_liste_positions();
-		if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
+		if (ajouter_position(listePosN,ligne,ordre,numPhrase) == 0) return 0;
 		noeudAAdd->positions=*listePosN;
 
 		arbre->nb_mots_differents++;
@@ -62,7 +62,7 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 
 		if (strcmp(iter->mot,mot) == 0){
 			// alors il y a déjà une occurence du mot dans l'arbre
-			ajouter_position(iter->positions,ligne,ordre);
+			ajouter_position(&(iter->positions),ligne,ordre,numPhrase);
 			arbre->nb_mots_total++;
 			iter=NULL;
 		} else if (strcmp(iter->mot,mot) < 0){
@@ -84,7 +84,7 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 				// On crée la liste des positions.
 
 				ListePosition* listePosN=creer_liste_positions();
-				if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
+				if (ajouter_position(listePosN,ligne,ordre,numPhrase) == 0) return 0;
 				noeudAAdd->positions=*listePosN;
 
 				arbre->nb_mots_differents++;
@@ -111,7 +111,7 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre){
 				// On crée la liste des positions.
 
 				ListePosition* listePosN=creer_liste_positions();
-				if (ajouter_position(listePosN,ligne,ordre) == 0) return 0;
+				if (ajouter_position(listePosN,ligne,ordre,numPhrase) == 0) return 0;
 				noeudAAdd->positions=*listePosN;
 
 				arbre->nb_mots_differents++;
