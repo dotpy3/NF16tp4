@@ -12,3 +12,14 @@ B. Fonctions à implémenter
 - charger_fichier : OK
 - rechercher_noeud : OK
 - afficher_arbre : OK
+
+C. Programme principal
+- le menu avec les différents choix doit s'afficher : OK
+- l'ABR doit être créé : OK
+- charger un fichier dans l'ABR : OK
+- afficher les caractéristiques de l'ABR : A FAIRE
+- afficher tous les mots distincts par ordre alphabétique : OK
+- recherche un mot : OK
+- affiche les phrases contenant deux mots : A FAIRE
+- équilibre l'arbre : A FAIRE (en bonus seulement)
+- quitte le programme : A FAIRE

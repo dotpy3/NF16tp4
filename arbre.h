@@ -12,3 +12,8 @@ typedef struct ArbreBR {
 } ArbreBR;
 
 ArbreBR *creer_abr();
+int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase);
+NoeudABR *rechercher_noeud(ArbreBR *arbre, char *mot);
+void afficher_noeud(NoeudABR noeud);
+void afficher_noeuds(NoeudABR noeud);
+void afficher_arbre(ArbreBR arbre);

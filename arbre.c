@@ -125,6 +125,8 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase
 }
 
 NoeudABR *rechercher_noeud(ArbreBR *arbre, char *mot){
+	// Rend NULL si le noeud n'a pas été trouvé
+	// sinon rend le pointeur vers le nœud correspondant
 	NoeudABR *iter=arbre->racine;
 
 	if (iter==NULL) return NULL;
@@ -142,15 +144,21 @@ NoeudABR *rechercher_noeud(ArbreBR *arbre, char *mot){
 	return iter;
 }
 
-void afficher_noeuds(NoeudABR noeud){
-	if (noeud.filsGauche != NULL)
-		afficher_noeuds(*(noeud.filsGauche));
+void afficher_noeud(NoeudABR noeud){
+	// idem que afficher_noeuds, mais sans la récurrence
 	printf("=====> MOT : %s\n",noeud.mot);
 	Position *iter=(noeud.positions).debut;
 	while(iter != NULL){
 		printf("%d-e occurence : s'affiche en ligne %d, à la %d-e phrase.\n",iter->ordre,iter->numero_ligne,iter->numero_phrase);
 		iter=iter->suivant;
 	}
+	return;
+}
+
+void afficher_noeuds(NoeudABR noeud){
+	if (noeud.filsGauche != NULL)
+		afficher_noeuds(*(noeud.filsGauche));
+	afficher_noeud(noeud);
 	if (noeud.filsDroit != NULL)
 		afficher_noeuds(*(noeud.filsDroit));
 	return;
