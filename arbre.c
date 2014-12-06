@@ -1,6 +1,6 @@
 #include <stdio.h> // A supprimer plus tard
 #include <stdlib.h> // A supprimer plus tard
-#include "liste.h" // A supprimer plus tard
+#include "liste.c" // A supprimer plus tard
 #include "arbre.h"
 
 ArbreBR *creer_abr() {
@@ -126,6 +126,44 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase
 
 	return 1;
 }
+
+NoeudABR *rechercher_noeud(ArbreBR *arbre, char *mot){
+	NoeudABR *iter=arbre->racine;
+
+	if (iter==NULL) return NULL;
+
+	while(strcmp(iter->mot,mot) != 0){
+		if(strcmp(iter->mot,mot) < 0){
+			if(iter->filsGauche == NULL) return NULL;
+			else iter=iter->filsGauche;
+		} else {
+			if(iter->filsDroit == NULL) return NULL;
+			else iter=iter->filsDroit;
+		}
+	}
+
+	return iter;
+}
+
+void afficher_noeuds(NoeudABR noeud){
+	if (noeud.filsGauche != NULL)
+		afficher_noeuds(*(noeud.filsGauche));
+	printf("=====> MOT : %s\n",noeud.mot);
+	Position *iter=(noeud.positions).debut;
+	while(iter != NULL){
+		printf("%d-e occurence : s'affiche en ligne %d, à la %d-e phrase.\n",iter->ordre,iter->numero_ligne,iter->numero_phrase);
+		iter=iter->suivant;
+	}
+	if (noeud.filsDroit != NULL)
+		afficher_noeuds(*(noeud.filsDroit));
+	return;
+}
+
+void afficher_arbre(ArbreBR arbre){
+	if (arbre.racine == NULL) return;
+	afficher_noeuds(*(arbre.racine));
+}
+
 /*
 int main()
 {

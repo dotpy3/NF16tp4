@@ -9,3 +9,6 @@ B. Fonctions à implémenter
 - ajouter_position : OK (ne devrait que prendre 3 arguments... non ?)
 - creer_abr : OK
 - ajouter_noeud : OK
+- charger_fichier : OK
+- rechercher_noeud : OK
+- afficher_arbre : OK
