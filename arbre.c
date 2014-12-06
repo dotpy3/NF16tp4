@@ -1,7 +1,7 @@
 #include "arbre.h"
 
 ArbreBR *creer_abr() {
-	/* Cr�� un nouvel ABR vide.
+	/* Créé un nouvel ABR vide.
        Retourne un pointeur vers celui-ci ou NULL en cas d'�chec. */
 
 	ArbreBR *arbre = (ArbreBR *)malloc(sizeof(ArbreBR));
@@ -160,13 +160,3 @@ void afficher_arbre(ArbreBR arbre){
 	if (arbre.racine == NULL) return;
 	afficher_noeuds(*(arbre.racine));
 }
-
-/*
-int main()
-{
-	ArbreBR *nouvel = creer_abr();
-
-	printf("NB elts : %d\n", nouvel->nb_mots_differents);
-
-	return 0;
-}*/

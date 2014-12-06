@@ -30,13 +30,3 @@ int charger_fichier(ArbreBR *arbre, char *filename) {
 		return 0;
 	}
 }
-
-int main()
-{
-	ArbreBR *nouvel = creer_abr();
-	int reschargement = charger_fichier(nouvel, "roman.txt");
-
-	printf("NB elts : %d, Resultat : %d\n", nouvel->nb_mots_differents, reschargement);
-
-	return 0;
-}
