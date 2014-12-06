@@ -1,6 +1,3 @@
-#include <stdio.h> // A supprimer plus tard
-#include <stdlib.h> // A supprimer plus tard
-#include "liste.c" // A supprimer plus tard
 #include "arbre.h"
 
 ArbreBR *creer_abr() {

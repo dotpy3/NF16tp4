@@ -1,5 +1,3 @@
-#include <stdio.h> // A supprimer plus tard
-#include <stdlib.h> // A supprimer plus tard
 #include "liste.h"
 
 ListePosition *creer_liste_positions() {

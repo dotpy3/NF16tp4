@@ -1,9 +1,8 @@
-#include "arbre.c" // A supprimer plus tard
 #include "outils.h"
 
 int charger_fichier(ArbreBR *arbre, char *filename) {
 	FILE *fichier = fopen(filename, "r");
-	
+
 	if(fichier != NULL) { // Fichier ouvert avec succ�s.
 		char mot[100]; // Longueur maximale d'un mot.
 		char c;
