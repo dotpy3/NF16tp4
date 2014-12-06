@@ -1,5 +1,3 @@
-#include "outils.h"
-
 int charger_fichier(ArbreBR *arbre, char *filename) {
 	FILE *fichier = fopen(filename, "r");
 

@@ -1,5 +1,3 @@
-#include "liste.h"
-
 ListePosition *creer_liste_positions() {
 	/* Créé une nouvelle liste de positions.
 	   Retourne un pointeur vers celle-ci ou NULL en cas d'�chec. */

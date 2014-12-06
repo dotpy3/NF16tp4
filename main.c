@@ -1,6 +1,12 @@
-#include "arbre.c"
-#include "liste.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "liste.h"
+#include "arbre.h"
+#include "outils.h"
 #include "outils.c"
+#include "liste.c"
+#include "arbre.c"
 
 int main()
 {
@@ -84,7 +90,7 @@ int main()
 				printf("Quel mot voulez-vous rechercher ?\n>");
 				scanf("%s",nom);
 				noeud= rechercher_noeud(arbre,nom);
-				if (noeud!=NULL) afficher_noeud(noeud);
+				if (noeud!=NULL) afficher_noeud(*noeud);
 				else printf("Le nœud n'a pas été trouvé !\n");
 				choix=0;
 				break;
@@ -93,16 +99,17 @@ int main()
 
 
 				// A FAIRE
-
+				break;
 			case 7:
 				// EQUILIBRAGE DE L'ARBRE
 
 				// A FAIRE
-
+				break;
 			case 8:
 				// quitter
 
 				// VIDAGE DELA MEMOIRE : A FAIRE
+				break;
 		}
 	}while(choix>=0);
 	return 0;

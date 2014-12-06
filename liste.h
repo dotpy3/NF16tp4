@@ -1,4 +1,4 @@
-// Définition du type Position correspondant à une structure qui contient les différentes informations de caractérisation de la position d'un mot dans le texte.
+// Dï¿½finition du type Position correspondant ï¿½ une structure qui contient les diffï¿½rentes informations de caractï¿½risation de la position d'un mot dans le texte.
 typedef struct Position {
 	int numero_ligne;
 	int ordre;
@@ -6,12 +6,12 @@ typedef struct Position {
 	struct Position *suivant;
 } Position;
 
-// Définition du type ListePosition correspondant à une structure permettant de regrouper la liste de positions de toutes les occurences d'un mot dans un texte.
+// Dï¿½finition du type ListePosition correspondant ï¿½ une structure permettant de regrouper la liste de positions de toutes les occurences d'un mot dans un texte.
 typedef struct ListePosition {
 	struct Position *debut;
 	int nb_elements;
 } ListePosition;
 
-// Définition des prototypes de fonction ayant trait au traitementt des positions et listes de positions.
+// Dï¿½finition des prototypes de fonction ayant trait au traitementt des positions et listes de positions.
 ListePosition *creer_liste_positions();
 int ajouter_position(ListePosition *listeP, int ligne, int ordre, int numero_phrase);

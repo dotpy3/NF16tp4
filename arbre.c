@@ -1,5 +1,3 @@
-#include "arbre.h"
-
 ArbreBR *creer_abr() {
 	/* Créé un nouvel ABR vide.
        Retourne un pointeur vers celui-ci ou NULL en cas d'�chec. */
