@@ -1,7 +1,7 @@
 #include "liste.h"
 
 ListePosition *creer_liste_positions() {
-	/* Cr�� une nouvelle liste de positions.
+	/* Créé une nouvelle liste de positions.
 	   Retourne un pointeur vers celle-ci ou NULL en cas d'�chec. */
 
 	ListePosition *liste_positions = (ListePosition *)malloc(sizeof(ListePosition));
@@ -56,16 +56,4 @@ int ajouter_position(ListePosition *listeP, int ligne, int ordre, int numero_phr
 
 		return 0;
 	}
-}
-
-int main()
-{
-	ListePosition *nouvelleListePositions = creer_liste_positions();
-	int resAjoutPosition = ajouter_position(nouvelleListePositions, 3, 10, 2);
-	int resAjoutPosition2 = ajouter_position(nouvelleListePositions, 4, 5, 2);
-	int resAjoutPosition3 = ajouter_position(nouvelleListePositions, 1, 26, 12);
-
-	printf("NB elts : %d, Ajout reussi ? : %d, Ajout 2 reussi ? : %d, Ajout 3 reussi ? : %d\n", nouvelleListePositions->nb_elements, resAjoutPosition, resAjoutPosition2, resAjoutPosition3);
-
-	return 0;
 }
