@@ -30,13 +30,19 @@ int main()
 			*/
 			case 0:
 				// choix
+				printf("********** Indexation **********\n\n");
 				printf("Que voulez-vous faire ?\n");
 				printf("1. Créer un ABR\n2. Charger un fichier dans l'ABR\n");
-
 				printf("3. Afficher les caractéristiques de l'ABR\n4. Affiche tous les mots distincts par ordre alphabétique\n");
 				printf("5. Recherche un mot\n6. Affiche les phrases contenant les deux mots saisis\n");
-				printf("7. Équilibre l'arbre\n8. Quitter\n>");
+				printf("7. Équilibre l'arbre\n8. Quitter\n");
+				if (arbre!=NULL) {
+					printf("Un arbre est existant.\n\n> ");
+				} else {
+					printf("\n> ");
+				}
 				scanf("%d",&choix);
+				printf("********************************\n\n\n");
 				break;
 			case 1:
 				// création de l'arbre
