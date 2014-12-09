@@ -20,6 +20,6 @@ C. Programme principal
 - afficher les caractéristiques de l'ABR : OK
 - afficher tous les mots distincts par ordre alphabétique : OK
 - recherche un mot : OK
-- affiche les phrases contenant deux mots : A FAIRE
+- affiche les phrases contenant deux mots : PAS FINI : A FAIRE : FONCTION AFFICHER_PHRASE (CF .H)
 - équilibre l'arbre : A FAIRE (en bonus seulement)
 - quitte le programme : A FAIRE

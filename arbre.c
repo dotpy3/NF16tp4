@@ -231,3 +231,39 @@ int equilibre(ArbreBR arbre){
 	// rend 0 sinon
 	return equNoeudRec(*(arbre.racine));
 }
+
+void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
+	// Cette phrase affiche toutes les phrases contenant les 2 mots saisis.
+
+	// On commence par construire une structure de liste chaînée qui contiendra toutes les phrases déjà lues.
+	struct listeC *init=malloc(sizeof(struct listeC));
+	struct listeC *iter=init;
+	init.val=NULL; // puisque aucune phrase n'a pour numéro NULL
+	init.suiv=NULL;
+	// on commence l'algo
+
+	NoeudABR *noeud1 = rechercher_noeud(&arbre,*str1);
+	NoeudABR *noeud2 = rechercher_noeud(&arbre,*str2);
+
+	if(noeud1 == NULL || noeud2 == NULL) {
+		printf("Un ou plusieurs mots n'a pas été trouvé.\n");
+		return;
+	}
+
+	// à ce stade on trouve bien les deux mots dans le texte, on va donc chercher dans quelles phrases ils se trouvent
+	struct position *posmot1, *posmot2;
+	for(posmot1=(noeud1->positions).debut;posmot1 != NULL;posmot1=posmot1->suiv){
+		for(posmot2=(noeud1->positions).debut;posmot2 != NULL;posmot2=posmot2->suiv){
+			if(posmot1->numero_phrase == posmot2->numero_phrase){
+				while(iter != NULL && iter.val != posmot1->numero_phrase) iter=iter->suiv;
+				if(iter.val != posmot1->numero_phrase) afficher_phrase(posmot1->numero_phrase,nomfichier);
+					/*
+					BESOIN DE FAIRE UNE FONCTION AFFICHER_PHRASE QUI AFFICHE LA N-IEME PHRASE D'UN FICHIER
+					*/
+				iter=init;
+			}
+		}
+	}
+	if(init.val==NULL) printf("Aucune phrase correspondante trouvé.\n");
+	return;
+}

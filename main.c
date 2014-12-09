@@ -12,7 +12,9 @@ int main()
 {
 	int choix=0;
 	char choix2;
-	char nom[100];
+	char nomfichier[100];
+	char* nom;
+	char* nom2;
 	NoeudABR* noeud;
 	ArbreBR *arbre=NULL;
 	do{
@@ -62,8 +64,8 @@ int main()
 					break;
 				}
 				printf("Quel fichier voulez-vous charger ?\n>");
-				scanf("%s",nom);
-				if (charger_fichier(arbre,nom) != 0) printf("Fichier chargé avec succès.\n");
+				scanf("%s",nomfichier);
+				if (charger_fichier(arbre,nomfichier) != 0) printf("Fichier chargé avec succès.\n");
 				else printf("Échec lors du chargement du fichier !\n");
 				choix=0;
 				break;
@@ -101,6 +103,7 @@ int main()
 					break;
 				}
 				printf("Quel mot voulez-vous rechercher ?\n>");
+				nom=malloc(100*sizeof(char));
 				scanf("%s",nom);
 				noeud= rechercher_noeud(arbre,nom);
 				if (noeud!=NULL) afficher_noeud(*noeud);
@@ -109,9 +112,19 @@ int main()
 				break;
 			case 6:
 				// affichage des phrases contenant les 2 mots saisis
+				if (arbre==NULL){
+					printf("L'arbre n'a pas été créé !\n");
+					choix =0;
+					break;
+				}
 
+				printf("Quels mots voulez-vous rechercher ?\n>");
+				nom=malloc(100*sizeof(char));
+				nom2=malloc(100*sizeof(char));
+				scanf("%s%s",nom,nom2);
+				rechPhrase(*arbre,nom,nom2,nomfichier);
 
-				// A FAIRE
+				choix=0;
 				break;
 			case 7:
 				// EQUILIBRAGE DE L'ARBRE

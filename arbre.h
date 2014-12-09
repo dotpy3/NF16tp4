@@ -13,6 +13,14 @@ typedef struct ArbreBR {
 	int nb_mots_total;
 } ArbreBR;
 
+// Pour les besoins de rechPhrase, on crée une structure de liste chaînées qui contient une liste de valeurs
+// On l'utilisera pour lister toutes les phrases déjà lues
+
+struct listeC{
+	int val;
+	struct listeC * suiv;
+};
+
 // D�finition des prototypes de fonction ayant trait aux ABR, aux noeuds de l'ABR ou encore � son affichage.
 ArbreBR *creer_abr();
 int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase);
@@ -25,3 +33,8 @@ int equNoeud(NoeudABR noeud);
 int equNoeudRec(NoeudABR noeud);
 int equilibre(ArbreBR arbre);
 int hauteur(NoeudABR noeud);
+void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier);
+void afficher_phrase(int nb,char* nomfichier);
+/*
+afficher_phrase affiche la nb-ieme phrase du fichier de nom nomfichier. elle n'est pas encore faite.
+*/
