@@ -166,3 +166,68 @@ void afficher_arbre(ArbreBR arbre){
 	if (arbre.racine == NULL) return;
 	afficher_noeuds(*(arbre.racine));
 }
+
+int nb_descendents(NoeudABR noeud){
+	// pour un nœud défini, rend le nombre de descendents
+	int nbDesc=0;
+	if (noeud.filsGauche != NULL){
+		nbDesc = nbDesc+1+nb_descendents(*(noeud.filsGauche));
+	}
+	if (noeud.filsDroit != NULL){
+		nbDesc = nbDesc+1+nb_descendents(*(noeud.filsDroit));
+	}
+	return nbDesc;
+}
+
+int hauteur(NoeudABR noeud){
+	// pour un nœud défini, rend la hauteur (qui commence à 0)
+	int fG, fD;
+	if (noeud.filsGauche == NULL){
+		if (noeud.filsDroit == NULL) return 0;
+		else {
+			return hauteur(*(noeud.filsDroit))+1;
+		}
+	} else if (noeud.filsDroit == NULL) return hauteur(*(noeud.filsGauche))+1;
+	else {
+		fG = hauteur(*(noeud.filsGauche))+1;
+		fD = hauteur(*(noeud.filsDroit))+1;
+		if (fG > fD) return fG;
+		else return fD;
+	}
+}
+
+int equNoeud(NoeudABR noeud){
+	// rend 1 si le nœud est équilibré
+	// rend 0 si le nœud n'est pas équilibré
+	if(noeud.filsGauche == NULL){
+		if(noeud.filsDroit == NULL || hauteur(*(noeud.filsDroit)) == 0) return 1;
+		else return 0;
+	} else if(noeud.filsDroit == NULL){
+		if(noeud.filsGauche == NULL || hauteur(*(noeud.filsGauche)) == 0) return 1;
+		else return 0;
+	} else {
+		int hG =hauteur(*(noeud.filsGauche)), hD = hauteur(*(noeud.filsDroit));
+		if ((hG - hD) >= -1 && (hG - hD) <= 1) return 1;
+		else return 0;
+	}
+}
+
+int equNoeudRec(NoeudABR noeud){
+	// rend 1 si le nœud et tous ses descendents sont équilibrés
+	// rend 0 sinon
+	if (equNoeud(noeud) == 0) return 0;
+	else {
+		if (noeud.filsGauche == NULL && noeud.filsDroit == NULL) return 1;
+		else if (noeud.filsGauche == NULL) return equNoeudRec(*(noeud.filsDroit));
+		else if (noeud.filsDroit == NULL) return equNoeudRec(*(noeud.filsGauche));
+		else if (equNoeudRec(*(noeud.filsGauche)) == 1 && equNoeudRec(*(noeud.filsDroit)) == 1) return 1;
+		else return 0;
+	}
+}
+
+int equilibre(ArbreBR arbre){
+	// On considère qu'un arbre est équilibré si en tout nœud x, |hauteur(droit(x))-hauteur(gauche(x))| <= 1.
+	// rend 1 si l'arbre est équilibré
+	// rend 0 sinon
+	return equNoeudRec(*(arbre.racine));
+}

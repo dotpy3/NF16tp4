@@ -20,3 +20,8 @@ NoeudABR *rechercher_noeud(ArbreBR *arbre, char *mot);
 void afficher_noeud(NoeudABR noeud);
 void afficher_noeuds(NoeudABR noeud);
 void afficher_arbre(ArbreBR arbre);
+int nb_descendents(NoeudABR noeud);
+int equNoeud(NoeudABR noeud);
+int equNoeudRec(NoeudABR noeud);
+int equilibre(ArbreBR arbre);
+int hauteur(NoeudABR noeud);

@@ -70,11 +70,18 @@ int main()
 			case 3:
 				// affichage des caractéristiques de l'arbre
 
-
-
-				// A FAIRE
-
-
+				if (arbre==NULL){
+					printf("L'arbre n'a pas été créé !\n");
+					choix =0;
+					break;
+				}
+				printf("Caractéristiques de l'arbre :\n");
+				printf("Nombre de noeuds dans l'arbre : %d\n",nb_descendents(*(arbre->racine)));
+				printf("Profondeur de l'arbre (commence à 0 pour un arbre avec juste une racine) : %d\n",hauteur(*(arbre->racine)));
+				if (equilibre(*arbre)) printf("L'arbre est équilibré !\n");
+				else printf("L'arbre n'est pas équilibré !\n");
+				choix=0;
+				break;
 
 			case 4:
 				// affichage des mots par ordre alphabétique
