@@ -238,12 +238,12 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 	// On commence par construire une structure de liste chaînée qui contiendra toutes les phrases déjà lues.
 	struct listeC *init=malloc(sizeof(struct listeC));
 	struct listeC *iter=init;
-	init.val=NULL; // puisque aucune phrase n'a pour numéro NULL
-	init.suiv=NULL;
+	init->val=-1; // puisque aucune phrase n'a pour numéro -1
+	init->suiv=NULL;
 	// on commence l'algo
 
-	NoeudABR *noeud1 = rechercher_noeud(&arbre,*str1);
-	NoeudABR *noeud2 = rechercher_noeud(&arbre,*str2);
+	NoeudABR *noeud1 = rechercher_noeud(&arbre,str1);
+	NoeudABR *noeud2 = rechercher_noeud(&arbre,str2);
 
 	if(noeud1 == NULL || noeud2 == NULL) {
 		printf("Un ou plusieurs mots n'a pas été trouvé.\n");
@@ -251,20 +251,23 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 	}
 
 	// à ce stade on trouve bien les deux mots dans le texte, on va donc chercher dans quelles phrases ils se trouvent
-	struct position *posmot1, *posmot2;
-	for(posmot1=(noeud1->positions).debut;posmot1 != NULL;posmot1=posmot1->suiv){
-		for(posmot2=(noeud1->positions).debut;posmot2 != NULL;posmot2=posmot2->suiv){
+	struct Position *posmot1=(noeud1->positions).debut, *posmot2;
+	while(posmot1 != NULL){
+		posmot2 =(noeud1->positions).debut;
+		while(posmot2 != NULL){
 			if(posmot1->numero_phrase == posmot2->numero_phrase){
-				while(iter != NULL && iter.val != posmot1->numero_phrase) iter=iter->suiv;
-				if(iter.val != posmot1->numero_phrase) afficher_phrase(posmot1->numero_phrase,nomfichier);
+				while(iter != NULL && iter->val != posmot1->numero_phrase) iter=iter->suiv;
+				if(iter->val != posmot1->numero_phrase) afficher_phrase(posmot1->numero_phrase,nomfichier);
 					/*
 					BESOIN DE FAIRE UNE FONCTION AFFICHER_PHRASE QUI AFFICHE LA N-IEME PHRASE D'UN FICHIER
 					*/
 				iter=init;
 			}
+			posmot2=posmot2->suivant;
 		}
+		posmot1=posmot1->suivant;
 	}
-	if(init.val==NULL) printf("Aucune phrase correspondante trouvé.\n");
+	if(init->suiv == NULL) printf("Aucune phrase correspondante trouvé.\n");
 	return;
 }
 

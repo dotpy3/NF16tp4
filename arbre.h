@@ -18,7 +18,7 @@ typedef struct ArbreBR {
 
 struct listeC{
 	int val;
-	struct listeC * suiv;
+	struct listeC *suiv;
 };
 
 // D�finition des prototypes de fonction ayant trait aux ABR, aux noeuds de l'ABR ou encore � son affichage.
