@@ -1,6 +1,6 @@
 ListePosition *creer_liste_positions() {
 	/* Créé une nouvelle liste de positions.
-	   Retourne un pointeur vers celle-ci ou NULL en cas d'�chec. */
+	   Retourne un pointeur vers celle-ci ou NULL en cas d'échec. */
 
 	ListePosition *liste_positions = (ListePosition *)malloc(sizeof(ListePosition));
 
@@ -14,10 +14,10 @@ ListePosition *creer_liste_positions() {
 }
 
 int ajouter_position(ListePosition *listeP, int ligne, int ordre, int numero_phrase) {
-	/* Ajoute une position en respectant l'ordre du mot dans le texte � une ListePosition.
-	   Retourne 1 en cas de succ�s, sinon 0. */
+	/* Ajoute une position en respectant l'ordre du mot dans le texte à une ListePosition.
+	   Retourne 1 en cas de succès, sinon 0. */
 
-	// Cr�ation d'une nouvelle position
+	// Création d'une nouvelle position
 	Position *nouvelle_position = (Position *)malloc(sizeof(Position));
 
 	if (nouvelle_position == NULL) return 0; // Une erreur d'allocation est survenue.
@@ -32,11 +32,11 @@ int ajouter_position(ListePosition *listeP, int ligne, int ordre, int numero_phr
 		listeP->nb_elements++;
 		printf("Ok 1\n"); // A supprimer plus tard
 		return 1;
-	} else { // Cas 2 : tous les autres cas. On parcourt la liste cha�n�e pour trouver la position d'insertion.
-		Position *positionTemp = listeP->debut; // It�rateur
+	} else { // Cas 2 : tous les autres cas. On parcourt la liste chaînée pour trouver la position d'insertion.
+		Position *positionTemp = listeP->debut; // Itérateur
 
 		while(positionTemp->suivant != NULL) { // Tant que nous ne sommes pas au bout de la ListePosition
-			 if (positionTemp->numero_ligne <= nouvelle_position->numero_ligne && positionTemp->ordre <= nouvelle_position->ordre) { // L'�lement suivant a �t� trouv�, on ins�re la nouvelle position juste avant celui-ci.
+			 if (positionTemp->numero_ligne <= nouvelle_position->numero_ligne && positionTemp->ordre <= nouvelle_position->ordre) { // L'élement suivant a été trouvé, on insère la nouvelle position juste avant celui-ci.
 				nouvelle_position->suivant = positionTemp->suivant;
 				positionTemp->suivant = nouvelle_position;
 				listeP->nb_elements++;

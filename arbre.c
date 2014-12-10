@@ -1,6 +1,6 @@
 ArbreBR *creer_abr() {
 	/* Créé un nouvel ABR vide.
-       Retourne un pointeur vers celui-ci ou NULL en cas d'�chec. */
+       Retourne un pointeur vers celui-ci ou NULL en cas d'échec. */
 
 	ArbreBR *arbre = (ArbreBR *)malloc(sizeof(ArbreBR));
 
@@ -17,9 +17,6 @@ ArbreBR *creer_abr() {
 int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase){
 	if (arbre == NULL || mot == NULL)
 		return 0; // Cas où l'arbre ou le mot ne sont pas définis
-
-
-
 
 	// AJOUT DU NŒUD DANS L'ARBRE DE RECHERCHE
 
