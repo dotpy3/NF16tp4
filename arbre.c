@@ -267,3 +267,7 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 	if(init.val==NULL) printf("Aucune phrase correspondante trouvé.\n");
 	return;
 }
+
+void afficher_phrase(int nb,char* nomfichier){
+	return;
+}
