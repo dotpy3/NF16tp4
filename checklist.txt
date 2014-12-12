@@ -22,7 +22,7 @@ C. Programme principal
 - recherche un mot : OK
 - affiche les phrases contenant deux mots : PAS FINI : A FAIRE : FONCTION AFFICHER_PHRASE (CF .H)
 - équilibre l'arbre : A FAIRE (en bonus seulement)
-- quitte le programme : A FAIRE
+- quitte le programme : FAIT, à tester
 
 D. Autre
 - rapport : A FAIRE
