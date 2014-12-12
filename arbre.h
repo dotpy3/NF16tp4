@@ -34,3 +34,6 @@ int equilibre(ArbreBR arbre);
 int hauteur(NoeudABR noeud);
 void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier);
 void afficher_phrase(int nb,char* nomfichier); // afficher_phrase affiche la nb-ieme phrase du fichier de nom nomfichier. elle n'est pas encore faite.
+void supprimer_listePositions(NoeudABR* noeud);
+void supprimer_noeuds(NoeudABR* noeud);
+void supprimer_arbre(ArbreBR* arbre);
