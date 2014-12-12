@@ -133,8 +133,21 @@ int main()
 				break;
 			case 8:
 				// quitter
+				// a supprimer : - l'arbre
+				// dans l'arbre, chacun des nœuds
+				// dans chaque noeud, la liste des positions
+				// dans la liste des positions, chaque position
+				if (arbre==NULL){
+					printf("L'arbre n'a pas été créé !\n");
+					choix =0;
+					break;
+				}
 
-				// VIDAGE DELA MEMOIRE : A FAIRE
+				supprimer_arbre(&arbre);
+				printf("L'arbre a bien été supprimé.");
+
+				choix=0;
+				
 				break;
 		}
 	}while(choix>=0);
