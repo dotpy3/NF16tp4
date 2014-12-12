@@ -271,3 +271,31 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 void afficher_phrase(int nb,char* nomfichier){
 	return;
 }
+
+void supprimer_arbre(ArbreBR* arbre){
+	if (arbre->racine != NULL) supprimer_noeuds(arbre->racine);
+	free(arbre);
+	return;
+}
+
+void supprimer_noeuds(NoeudABR* noeud){
+	if(noeud->filsGauche != NULL) supprimer_noeuds(noeud->filsGauche);
+	if(noeud->filsDroit != NULL) supprimer_noeuds(noeud->filsDroit);
+	supprimer_listePositions(NoeudABR* noeud);
+	free(noeud->mot);
+	free(noeud);
+	return;
+}
+
+void supprimer_listePositions(NoeudABR* noeud){
+	struct Position* iter1, *iter2;
+	iter1=(noeud->positions).debut;
+	iter2=iter1->suivant;
+	while(iter2 != NULL){
+		free(iter1);
+		iter1=iter2;
+		iter2=iter2->suivant;
+	}
+	free(iter1);
+	return;
+}
