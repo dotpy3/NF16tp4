@@ -281,7 +281,7 @@ void supprimer_arbre(ArbreBR* arbre){
 void supprimer_noeuds(NoeudABR* noeud){
 	if(noeud->filsGauche != NULL) supprimer_noeuds(noeud->filsGauche);
 	if(noeud->filsDroit != NULL) supprimer_noeuds(noeud->filsDroit);
-	supprimer_listePositions(NoeudABR* noeud);
+	supprimer_listePositions(noeud);
 	free(noeud->mot);
 	free(noeud);
 	return;
@@ -297,5 +297,90 @@ void supprimer_listePositions(NoeudABR* noeud){
 		iter2=iter2->suivant;
 	}
 	free(iter1);
+	return;
+}
+
+NoeudABR* pere(ArbreBR *arbre, NoeudABR* noeud){
+	// Cette fonction rend le père de noeud dans arbre si il y est, sinon NULL
+	return recupPere(arbre->racine,noeud);
+}
+
+NoeudABR* recupPere(NoeudABR* noeudEtu, NoeudABR* noeud){
+	if (noeudEtu == NULL) return NULL;
+	NoeudABR* fG = noeudEtu->filsGauche;
+	NoeudABR* fD = noeudEtu->filsDroit;
+	if (fG == noeud || fD == noeud) return noeudEtu;
+	else {
+		fG = recupPere(fG, noeud);
+		fD = recupPere(fD, noeud);
+		if(fG != NULL) return fG;
+		else if (fD != NULL) return fD;
+		else return NULL;
+	}
+}
+
+NoeudABR* RotDroite(ArbreBR *arbre, NoeudABR* noeud){
+	// Cette fonction effectue une rotation droite et rend le nouveau père de noeud
+	// rend NULL si la rotation a échoué
+	if (noeud != NULL && noeud->filsGauche != NULL){
+		NoeudABR* y = noeud->filsGauche;
+		NoeudABR* c = noeud->filsDroit;
+		NoeudABR* pereN= pere(arbre,noeud);
+		if(pereN != NULL){
+			if(pereN->filsGauche == noeud){
+				pereN->filsGauche = y;
+			} else {
+				pereN->filsDroit = y;
+			}
+		} else arbre->racine = y;
+		y->filsDroit = noeud;
+		noeud->filsGauche = c;
+		return y;
+	} else {
+		return noeud;
+	}
+}
+
+NoeudABR* RotGauche(ArbreBR *arbre, NoeudABR* noeud){
+	// Cette fonction effectue une rotation gauche et rend le nouveau père de noeud
+	// rend NULL si la rotation a échoué
+	if (noeud != NULL && noeud->filsGauche != NULL){
+		NoeudABR* x = noeud->filsDroit;
+		NoeudABR* c = noeud->filsGauche;
+		NoeudABR* pereN= pere(arbre,noeud);
+		if(pereN != NULL){
+			if(pereN->filsGauche == noeud){
+				pereN->filsGauche = x;
+			} else {
+				pereN->filsDroit = x;
+			}
+		} else arbre->racine = x;
+		x->filsGauche = noeud;
+		noeud->filsDroit = c;
+		return x;
+	} else {
+		return noeud;
+	}
+}
+
+void equilibrage(ArbreBR* arbre, NoeudABR* noeud){
+	int hauteurG, hauteurD, diffHauteur;
+	if(noeud->filsGauche != NULL){
+		equilibrage(arbre,noeud->filsGauche);
+		hauteurG = hauteur(*(noeud->filsGauche));
+	} else hauteurG = -1;
+	if(noeud->filsDroit != NULL) {
+		equilibrage(arbre,noeud->filsDroit);
+		hauteurD = hauteur(*(noeud->filsDroit));
+	} else hauteurD = -1;
+	// on a défini les hauteurs
+
+	diffHauteur = hauteurG - hauteurD;
+	if(diffHauteur > 1){
+		// alors l'arbre est trop haut à gauche et pas assez haut à droite
+		equilibrage(arbre,RotDroite(arbre,noeud));
+	} else if (diffHauteur < -1) {
+		equilibrage(arbre,RotGauche(arbre,noeud));
+	}
 	return;
 }

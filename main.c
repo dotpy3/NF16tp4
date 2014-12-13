@@ -128,8 +128,24 @@ int main()
 				break;
 			case 7:
 				// EQUILIBRAGE DE L'ARBRE
+				if (arbre==NULL){
+					printf("L'arbre n'a pas été créé !\n");
+					choix =0;
+					break;
+				}
 
-				// A FAIRE
+				if (arbre->racine==NULL){
+					printf("Il n'y a pas de racine dans l'arbre !\n");
+					choix =0;
+					break;
+				}
+
+				equilibrage(arbre, arbre->racine);
+
+				printf("L'arbre a bien été équilibré !\n");
+
+				choix=0;
+
 				break;
 			case 8:
 				// quitter
@@ -143,11 +159,11 @@ int main()
 					break;
 				}
 
-				supprimer_arbre(&arbre);
-				printf("L'arbre a bien été supprimé.");
+				supprimer_arbre(arbre);
+				printf("L'arbre a bien été supprimé.\n");
 
-				choix=0;
-				
+				choix=-1;
+
 				break;
 		}
 	}while(choix>=0);

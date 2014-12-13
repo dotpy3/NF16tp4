@@ -37,3 +37,8 @@ void afficher_phrase(int nb,char* nomfichier); // afficher_phrase affiche la nb-
 void supprimer_listePositions(NoeudABR* noeud);
 void supprimer_noeuds(NoeudABR* noeud);
 void supprimer_arbre(ArbreBR* arbre);
+NoeudABR* pere(ArbreBR *arbre, NoeudABR* noeud);
+NoeudABR* recupPere(NoeudABR* noeudEtu, NoeudABR* noeud);
+NoeudABR* RotDroite(ArbreBR *arbre, NoeudABR* noeud);
+NoeudABR* RotGauche(ArbreBR *arbre, NoeudABR* noeud);
+void equilibrage(ArbreBR* arbre, NoeudABR* noeud);

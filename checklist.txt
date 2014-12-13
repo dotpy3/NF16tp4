@@ -21,8 +21,8 @@ C. Programme principal
 - afficher tous les mots distincts par ordre alphabétique : OK
 - recherche un mot : OK
 - affiche les phrases contenant deux mots : PAS FINI : A FAIRE : FONCTION AFFICHER_PHRASE (CF .H)
-- équilibre l'arbre : A FAIRE (en bonus seulement)
-- quitte le programme : FAIT, à tester
+- équilibre l'arbre : OK (à tester)
+- quitte le programme : OK (à tester)
 
 D. Autre
 - rapport : A FAIRE
