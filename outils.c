@@ -1,31 +1,47 @@
 int charger_fichier(ArbreBR *arbre, char *filename) {
-	FILE *fichier = fopen(filename, "r");
+	FILE * fichier = fopen(filename, "r");
+	char * buf = (char *)malloc(sizeof(char)); // Buffer de la taille d'un caractère
+	char * mot  = malloc(TAILLE_MOT*sizeof(char));
+	int numLigne = 1, ordreMot = 1, numPhrase = 1, i = 0;
 
-	if(fichier != NULL) { // Fichier ouvert avec succès.
-		char mot[100]; // Longueur maximale d'un mot.
-		char c;
-		int nombre_mots = 0, numero_ligne = 0, numero_mot = 0;
-
-		do {
-			c = fscanf(fichier, "%s", mot); // Récupère un mot.
-			printf("Mot : %s\t\t\t\t\tNumero : %d\tLigne : %d\tPosition : %d\n", mot, nombre_mots, numero_ligne, numero_mot); // Affiche ce mot.
-			ajouter_noeud(arbre, mot, numero_ligne, numero_mot, numero_ligne); // A REVOIR, LES VARIABLES SONT LES MAUVAISES !!!!
-
-			if (c == '\n')
-		        numero_ligne++;
-
-			nombre_mots++;
-		} while (c != EOF); // Arrête la lecture à la fin du fichier.
-
-		printf("Ok\n");
-
-		fclose(fichier); // Fermeture du flux vers le fichier.
-
-		return nombre_mots;
-	} else { // Erreur d'ouverture du fichier.
-		printf("Erreur de lecture du fichier %s.\n", filename);
-		fclose(fichier); // Fermeture du flux vers le fichier.
-
-		return 0;
+	while(!feof(fichier)) {
+		fread(buf, sizeof(unsigned char), 1, fichier);
+		if(buf[0] == '\n') {
+		    if (i != 0) {
+                mot[i] = '\0';
+                printf("Mot : %s, numLigne : %d, ordreMot : %d, numPhrase : %d\n", mot, numLigne, ordreMot, numPhrase);
+                ajouter_noeud(arbre, mot, numLigne, ordreMot, numPhrase);
+                mot  = malloc(TAILLE_MOT*sizeof(char));
+                numLigne++;
+                ordreMot = 1;
+                i = 0;
+		    }
+		} else if (buf[0] == '.') {
+		    if (i != 0) {
+		        mot[i] = '\0';
+		        printf("Mot : %s, numLigne : %d, ordreMot : %d, numPhrase : %d\n", mot, numLigne, ordreMot, numPhrase);
+                ajouter_noeud(arbre, mot, numLigne, ordreMot, numPhrase);
+                mot  = malloc(TAILLE_MOT*sizeof(char));
+                numPhrase++;
+                i = 0;
+            }
+        } else if (buf[0] == ' ') {
+            if (i != 0) {
+                mot[i] = '\0';
+                printf("Mot : %s, numLigne : %d, ordreMot : %d, numPhrase : %d\n", mot, numLigne, ordreMot, numPhrase);
+                ajouter_noeud(arbre, mot, numLigne, ordreMot, numPhrase);
+                mot  = malloc(TAILLE_MOT*sizeof(char));
+                ordreMot++;
+                i = 0;
+            }
+		//} else if ((buf[0] >= 'a' && buf[0] <= 'z') || (buf[0] >= 'A' && buf[0] <= 'Z') || (buf[0] >= '0' && buf[0] <= '9') || (buf[0] >= 128 && buf[0] <= 165)) { // Majuscule ou Minuscule ou Chiffre ou Lettres accentuées
+		} else {
+            mot[i] = buf[0];
+            i++;
+		}
 	}
+
+	fclose(fichier);
+
+	return 1; // ajuster le return
 }
