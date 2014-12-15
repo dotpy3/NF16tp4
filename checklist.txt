@@ -5,24 +5,30 @@ A. STRUCTURE DE DONNEES
 - structure ArbreBR : OK
 
 B. Fonctions à implémenter
-- creer_liste_positions : OK
-- ajouter_position : OK (ne devrait que prendre 3 arguments... non ?)
-- creer_abr : OK
-- ajouter_noeud : OK
-- charger_fichier : A FAIRE
-- rechercher_noeud : OK
-- afficher_arbre : OK
+- creer_liste_positions : OK - VERIFIE
+- ajouter_position : OK - VERIFIE
+- creer_abr : OK - VERIFIE
+- ajouter_noeud : OK - VERIFIE
+- charger_fichier : A FAIRE - PRENDRE EN COMTPE PONCTUATION / MAJ-MIN
+- rechercher_noeud : OK - VERIFIE
+- afficher_arbre : OK - VERIFIE
 
 C. Programme principal
-- le menu avec les différents choix doit s'afficher : OK
-- l'ABR doit être créé : OK
-- charger un fichier dans l'ABR : OK
-- afficher les caractéristiques de l'ABR : OK
-- afficher tous les mots distincts par ordre alphabétique : OK
-- recherche un mot : OK
-- affiche les phrases contenant deux mots : PAS FINI : A FAIRE : FONCTION AFFICHER_PHRASE (CF .H)
-- équilibre l'arbre : OK (à tester)
-- quitte le programme : OK (à tester)
+- le menu avec les différents choix doit s'afficher : OK - VERIFIE
+- l'ABR doit être créé : OK - VERIFIE
+- charger un fichier dans l'ABR : OK - VERIFIE
+- afficher les caractéristiques de l'ABR : OK - VERIFIE
+- afficher tous les mots distincts par ordre alphabétique : A CORRIGER
+- recherche un mot : OK - VERIFIE
+- affiche les phrases contenant deux mots : A CORRIGER (fonction afficher_phrase marche, mais pas rechPhrase)
+- équilibre l'arbre : A CORRIGER
+- quitte le programme : OK - VERIFIE
 
 D. Autre
 - rapport : A FAIRE
+
+Fichiers modifiés :
+outils.h
+outils.c
+arbre.c
+à modifier : équilibre
