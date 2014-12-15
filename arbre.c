@@ -268,7 +268,31 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 	return;
 }
 
-void afficher_phrase(int nb,char* nomfichier){
+void afficher_phrase(int nb,char* filename){
+    FILE * fichier = fopen(filename, "r");
+	char * buf = (char *)malloc(sizeof(char)); // Buffer de la taille d'un caractère
+	int numLigne = 1, ordreMot = 1, numPhrase = 1, i = 0;
+
+	while(!feof(fichier)) {
+		fread(buf, 1, 1, fichier);
+		if(buf[0] == '\n') {
+            if (numPhrase == nb) printf(" ");
+		    if (i != 0) {
+                numLigne++;
+                ordreMot = 1;
+                i = 0;
+		    }
+		} else if (buf[0] == '.') {
+            if (numPhrase == nb) printf("%c",buf[0]);
+		    if (i != 0) {
+                numPhrase++;
+                i = 0;
+            }
+        } else {
+            if (numPhrase == nb) printf("%c",buf[0]);
+            i++;
+		}
+	}
 	return;
 }
 
@@ -337,7 +361,7 @@ NoeudABR* RotDroite(ArbreBR *arbre, NoeudABR* noeud){
 		noeud->filsGauche = c;
 		return y;
 	} else {
-		return noeud;
+		return NULL;
 	}
 }
 
@@ -359,11 +383,12 @@ NoeudABR* RotGauche(ArbreBR *arbre, NoeudABR* noeud){
 		noeud->filsDroit = c;
 		return x;
 	} else {
-		return noeud;
+		return NULL;
 	}
 }
 
 void equilibrage(ArbreBR* arbre, NoeudABR* noeud){
+    if (noeud == NULL) return;
 	int hauteurG, hauteurD, diffHauteur;
 	if(noeud->filsGauche != NULL){
 		equilibrage(arbre,noeud->filsGauche);
