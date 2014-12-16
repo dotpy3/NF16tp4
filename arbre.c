@@ -57,7 +57,8 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase
 			ajouter_position(&(iter->positions),ligne,ordre,numPhrase);
 			arbre->nb_mots_total++;
 			iter=NULL;
-		} else if (strcmp(iter->mot,mot) < 0){
+		} else if (strcmp(iter->mot,mot) > 0){
+			printf("%s est plus petit que %s\n",iter->mot,mot);
 			// si le nouveau mot est situé avant le suivant
 
 			if (iter->filsGauche != NULL) iter=iter->filsGauche;
@@ -85,7 +86,8 @@ int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase
 				iter->filsGauche=noeudAAdd;
 				iter=NULL;
 			}
-		} else if (strcmp(iter->mot,mot) > 0){
+		} else if (strcmp(iter->mot,mot) < 0){
+			printf("%s est plus petit que %s\n",mot,iter->mot);
 
 			if (iter->filsDroit != NULL) iter=iter->filsDroit;
 
@@ -178,18 +180,28 @@ int nb_descendents(NoeudABR noeud){
 
 int hauteur(NoeudABR noeud){
 	// pour un nœud défini, rend la hauteur (qui commence à 0)
-	int fG, fD;
+	int fG, fD, hau;
 	if (noeud.filsGauche == NULL){
-		if (noeud.filsDroit == NULL) return 0;
-		else {
-			return hauteur(*(noeud.filsDroit))+1;
+		if (noeud.filsDroit == NULL) {
+			return 0;
 		}
-	} else if (noeud.filsDroit == NULL) return hauteur(*(noeud.filsGauche))+1;
+		else {
+			hau = hauteur(*(noeud.filsDroit))+1;
+			return hau;
+		}
+	} else if (noeud.filsDroit == NULL) {
+		hau = hauteur(*(noeud.filsGauche))+1;
+		return hau;
+	}
 	else {
 		fG = hauteur(*(noeud.filsGauche))+1;
 		fD = hauteur(*(noeud.filsDroit))+1;
-		if (fG > fD) return fG;
-		else return fD;
+		if (fG > fD) {
+			return fG;
+		}
+		else {
+			return fD;
+		}
 	}
 }
 
@@ -204,6 +216,7 @@ int equNoeud(NoeudABR noeud){
 		else return 0;
 	} else {
 		int hG =hauteur(*(noeud.filsGauche)), hD = hauteur(*(noeud.filsDroit));
+		printf("Différence de hauteur entre le fils gauche et le fils droit de %s : %d",noeud.mot,hG - hD);
 		if ((hG - hD) >= -1 && (hG - hD) <= 1) return 1;
 		else return 0;
 	}
