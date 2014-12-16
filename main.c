@@ -37,20 +37,20 @@ int main()
 				printf("1. Créer un ABR\n2. Charger un fichier dans l'ABR\n");
 				printf("3. Afficher les caractéristiques de l'ABR\n4. Affiche tous les mots distincts par ordre alphabétique\n");
 				printf("5. Recherche un mot\n6. Affiche les phrases contenant les deux mots saisis\n");
-				printf("7. Équilibre l'arbre\n8. Quitter\n");
+				printf("7. Équilibre l'arbre\n8. Quitter\n\n");
 				if (arbre!=NULL) {
-					printf("Un arbre est existant.\n\n> ");
+					printf("ABR créé : OUI\n\n> ");
 				} else {
-					printf("\n> ");
+					printf("ABR créé : NON\n\n> ");
 				}
 				scanf("%d",&choix);
-				printf("********************************\n\n\n");
+				printf("********************************\n\n");
 				break;
 			case 1:
 				// création de l'arbre
 				if (arbre==NULL) arbre = creer_abr();
 				else {
-					printf("L'arbre existe déjà. Voulez-vous le remplacer ? (tapez y pour valider, tapez autre chose pour annuler)\n>");
+					printf("L'arbre existe déjà. Voulez-vous le remplacer ? (tapez y pour valider, tapez autre chose pour annuler)\n> ");
 					scanf("%c",&choix2);
 					if (choix2 == 'y') arbre = creer_abr();
 				}
@@ -63,7 +63,7 @@ int main()
 					choix =0;
 					break;
 				}
-				printf("Quel fichier voulez-vous charger ?\n>");
+				printf("Quel fichier voulez-vous charger ?\n> ");
 				scanf("%s",nomfichier);
 				if (charger_fichier(arbre,nomfichier) != 0) printf("Fichier chargé avec succès.\n");
 				else printf("Échec lors du chargement du fichier !\n");
@@ -102,7 +102,7 @@ int main()
 					choix =0;
 					break;
 				}
-				printf("Quel mot voulez-vous rechercher ?\n>");
+				printf("Quel mot voulez-vous rechercher ?\n> ");
 				nom=malloc(100*sizeof(char));
 				scanf("%s",nom);
 				noeud= rechercher_noeud(arbre,nom);
@@ -118,7 +118,7 @@ int main()
 					break;
 				}
 
-				printf("Quels mots voulez-vous rechercher ?\n>");
+				printf("Quels mots voulez-vous rechercher ?\n> ");
 				nom=malloc(100*sizeof(char));
 				nom2=malloc(100*sizeof(char));
 				scanf("%s%s",nom,nom2);
