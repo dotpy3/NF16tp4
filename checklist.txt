@@ -20,15 +20,9 @@ C. Programme principal
 - afficher les caractéristiques de l'ABR : OK - VERIFIE
 - afficher tous les mots distincts par ordre alphabétique : A CORRIGER
 - recherche un mot : OK - VERIFIE
-- affiche les phrases contenant deux mots : A CORRIGER (fonction afficher_phrase marche, mais pas rechPhrase)
+- affiche les phrases contenant deux mots : OK - VERIFIE
 - équilibre l'arbre : A CORRIGER
 - quitte le programme : OK - VERIFIE
 
 D. Autre
 - rapport : A FAIRE
-
-Fichiers modifiés :
-outils.h
-outils.c
-arbre.c
-à modifier : équilibre

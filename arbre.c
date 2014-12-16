@@ -229,15 +229,18 @@ int equilibre(ArbreBR arbre){
 	return equNoeudRec(*(arbre.racine));
 }
 
+struct listeC{
+	int val;
+	struct listeC *suiv;
+};
+typedef struct listeC* racine;
+
 void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 	// Cette phrase affiche toutes les phrases contenant les 2 mots saisis.
 
-	// On commence par construire une structure de liste chaînée qui contiendra toutes les phrases déjà lues.
-	struct listeC *init=malloc(sizeof(struct listeC));
-	struct listeC *iter=init;
-	init->val=-1; // puisque aucune phrase n'a pour numéro -1
+	racine init=malloc(sizeof(struct listeC)),iter;
+	init->val=-1;
 	init->suiv=NULL;
-	// on commence l'algo
 
 	NoeudABR *noeud1 = rechercher_noeud(&arbre,str1);
 	NoeudABR *noeud2 = rechercher_noeud(&arbre,str2);
@@ -253,18 +256,21 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier){
 		posmot2 =(noeud1->positions).debut;
 		while(posmot2 != NULL){
 			if(posmot1->numero_phrase == posmot2->numero_phrase){
-				while(iter != NULL && iter->val != posmot1->numero_phrase) iter=iter->suiv;
-				if(iter->val != posmot1->numero_phrase) afficher_phrase(posmot1->numero_phrase,nomfichier);
-					/*
-					BESOIN DE FAIRE UNE FONCTION AFFICHER_PHRASE QUI AFFICHE LA N-IEME PHRASE D'UN FICHIER
-					*/
-				iter=init;
+				 iter=init;
+				 while(iter != NULL && iter->val != posmot1->numero_phrase) iter=iter->suiv;
+				 if(iter == NULL){
+				 		afficher_phrase(posmot1->numero_phrase,nomfichier);
+						iter=init;
+						while(iter->suiv != NULL) iter=iter->suiv;
+						iter->suiv = malloc(sizeof(struct listeC));
+						iter->suiv->val=posmot1->numero_phrase;
+						iter->suiv->suiv=NULL;
+					}
 			}
 			posmot2=posmot2->suivant;
 		}
 		posmot1=posmot1->suivant;
 	}
-	if(init->suiv == NULL) printf("Aucune phrase correspondante trouvé.\n");
 	return;
 }
 
@@ -293,6 +299,7 @@ void afficher_phrase(int nb,char* filename){
             i++;
 		}
 	}
+	printf("\n");
 	return;
 }
 
