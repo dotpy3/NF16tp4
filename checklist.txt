@@ -8,7 +8,7 @@ B. Fonctions à implémenter
 - creer_liste_positions : OK - VERIFIE
 - ajouter_position : OK - VERIFIE
 - creer_abr : OK - VERIFIE
-- ajouter_noeud : A CORRIGER - N'AJOUTE PAS DANS L'ORDRE ALPHABETIQUE
+- ajouter_noeud : OK - VERIFIE
 - charger_fichier : A FAIRE - PRENDRE EN COMTPE PONCTUATION / MAJ-MIN
 - rechercher_noeud : OK - VERIFIE
 - afficher_arbre : OK - VERIFIE
