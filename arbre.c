@@ -17,7 +17,7 @@ ArbreBR *creer_abr() {
 int ajouter_noeud(ArbreBR *arbre, char *mot, int ligne, int ordre, int numPhrase) {
 	/* Ajoute un noeud à l'ABR.
        Retourne 1 en cas de succès, sinon 0. */
-	
+
 	if (arbre == NULL || mot == NULL)
 		return 0; // Cas où l'arbre ou le mot ne sont pas définis
 
@@ -131,7 +131,7 @@ NoeudABR *rechercher_noeud(ArbreBR *arbre, char *mot) {
 	if (iter==NULL) return NULL;
 
 	while(strcmp(iter->mot,mot) != 0){
-		if(strcmp(iter->mot,mot) < 0){
+		if(strcmp(iter->mot,mot) > 0){
 			if(iter->filsGauche == NULL) return NULL;
 			else iter=iter->filsGauche;
 		} else {
@@ -314,14 +314,14 @@ void afficher_phrase(int nb,char* filename) {
 
 void supprimer_arbre(ArbreBR* arbre) {
 	/* Libère la mémoire associée à l'élément ArbreBR. */
-	
+
 	if (arbre->racine != NULL) supprimer_noeuds(arbre->racine);
 	free(arbre);
 }
 
 void supprimer_noeuds(NoeudABR* noeud) {
 	/* Libère la mémoire associée à chaque noeuds de l'ABR. */
-	
+
 	if(noeud->filsGauche != NULL) supprimer_noeuds(noeud->filsGauche);
 	if(noeud->filsDroit != NULL) supprimer_noeuds(noeud->filsDroit);
 	supprimer_listePositions(noeud);
@@ -331,7 +331,7 @@ void supprimer_noeuds(NoeudABR* noeud) {
 
 void supprimer_listePositions(NoeudABR* noeud) {
 	/* Libère la mémoire associée à la liste de positions d'un noeud. */
-	
+
 	struct Position* iter1, *iter2;
 	iter1=(noeud->positions).debut;
 	iter2=iter1->suivant;
@@ -346,19 +346,19 @@ void supprimer_listePositions(NoeudABR* noeud) {
 NoeudABR* pere(ArbreBR *arbre, NoeudABR* noeud) {
 	/* Récupère le père d'un noeud.
 	   Retourne le noeud père si celui-ci existe ou NULL dans le cas opposé. */
-	
+
 	return recupPere(arbre->racine,noeud);
 }
 
 NoeudABR* recupPere(NoeudABR* noeudEtu, NoeudABR* noeud) {
 	/* Récupère le père d'un noeud.
 	   Retourne le noeud père si celui-ci existe ou NULL dans le cas opposé. */
-	
+
 	if (noeudEtu == NULL) return NULL;
-	
+
 	NoeudABR* fG = noeudEtu->filsGauche;
 	NoeudABR* fD = noeudEtu->filsDroit;
-	
+
 	if (fG == noeud || fD == noeud) return noeudEtu;
 	else {
 		fG = recupPere(fG, noeud);
@@ -372,7 +372,7 @@ NoeudABR* recupPere(NoeudABR* noeudEtu, NoeudABR* noeud) {
 NoeudABR* RotDroite(ArbreBR *arbre, NoeudABR* noeud) {
 	/* Cette fonction effectue une rotation droite.
 	   Renvoie le nouveau père de noeud ou NULL si la rotation a échoué */
-	
+
 	if (noeud != NULL && noeud->filsGauche != NULL) {
 		NoeudABR* y = noeud->filsGauche;
 		NoeudABR* c = noeud->filsDroit;
@@ -388,14 +388,14 @@ NoeudABR* RotDroite(ArbreBR *arbre, NoeudABR* noeud) {
 		noeud->filsGauche = c;
 		return y;
 	}
-	
+
 	return NULL;
 }
 
 NoeudABR* RotGauche(ArbreBR *arbre, NoeudABR* noeud) {
 	/* Cette fonction effectue une rotation gauche.
 	   Renvoie le nouveau père de noeud ou NULL si la rotation a échoué */
-	
+
 	if (noeud != NULL && noeud->filsGauche != NULL) {
 		NoeudABR* x = noeud->filsDroit;
 		NoeudABR* c = noeud->filsGauche;
@@ -411,29 +411,29 @@ NoeudABR* RotGauche(ArbreBR *arbre, NoeudABR* noeud) {
 		noeud->filsDroit = c;
 		return x;
 	}
-	
+
 	return NULL;
 }
 
 void equilibrage(ArbreBR* arbre, NoeudABR* noeud) {
 	/* Equilibre l'arbre en effectuant une rotation à droite où une rotation à gauche selon la hauteur des sous arbres au noeud donné. */
     if (noeud == NULL) return;
-	
+
 	int hauteurG, hauteurD, diffHauteur;
-	
+
 	if(noeud->filsGauche != NULL) {
 		equilibrage(arbre,noeud->filsGauche);
 		hauteurG = hauteur(*(noeud->filsGauche));
 	} else hauteurG = -1;
-	
+
 	if(noeud->filsDroit != NULL) {
 		equilibrage(arbre,noeud->filsDroit);
 		hauteurD = hauteur(*(noeud->filsDroit));
 	} else hauteurD = -1;
-	
+
 	// on a défini les hauteurs
 	diffHauteur = hauteurG - hauteurD;
-	
+
 	if(diffHauteur > 1) {
 		// alors l'arbre est trop haut à gauche et pas assez haut à droite
 		equilibrage(arbre,RotDroite(arbre,noeud));
