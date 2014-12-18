@@ -258,13 +258,12 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier) {
 		printf("Un ou plusieurs mots n'a pas été trouvé.\n\n");
 		return;
 	}
-	printf("Adresse du mot 1 : %p\nMot : %s\n",noeud1,noeud1->mot);
-	printf("Adresse du mot 2 : %p\nMot : %s\n",noeud2,noeud2->mot);
 
 	// à ce stade on trouve bien les deux mots dans le texte, on va donc chercher dans quelles phrases ils se trouvent
-	struct Position *posmot1=(noeud1->positions).debut, *posmot2;
+	struct Position *posmot1=(noeud1->positions).debut;
+	struct Position *posmot2;
 	while(posmot1 != NULL){
-		posmot2 =(noeud1->positions).debut;
+		posmot2 =(noeud2->positions).debut;
 		while(posmot2 != NULL){
 			if(posmot1->numero_phrase == posmot2->numero_phrase){
 				 iter=init;
@@ -282,6 +281,7 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier) {
 		}
 		posmot1=posmot1->suivant;
 	}
+
 	return;
 }
 
