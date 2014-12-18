@@ -30,7 +30,6 @@ int ajouter_position(ListePosition *listeP, int ligne, int ordre, int numero_phr
 	if (listeP->debut == NULL) { // Cas 1 : actuellement aucune position dans la liste.
 		listeP->debut = nouvelle_position;
 		listeP->nb_elements++;
-		printf("Ok 1\n"); // A supprimer plus tard
 		return 1;
 	} else { // Cas 2 : tous les autres cas. On parcourt la liste chaînée pour trouver la position d'insertion.
 		Position *positionTemp = listeP->debut; // Itérateur

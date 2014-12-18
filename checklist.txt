@@ -9,7 +9,7 @@ B. Fonctions à implémenter
 - ajouter_position : OK - VERIFIE
 - creer_abr : OK - VERIFIE
 - ajouter_noeud : OK - VERIFIE
-- charger_fichier : A FAIRE - PRENDRE EN COMTPE PONCTUATION / MAJ-MIN
+- charger_fichier : A FAIRE - PRENDRE EN COMPTE PONCTUATION
 - rechercher_noeud : OK - VERIFIE
 - afficher_arbre : OK - VERIFIE
 
@@ -26,3 +26,6 @@ C. Programme principal
 
 D. Autre
 - rapport : A FAIRE
+
+problème qd affichage des caractéristiques de l'arbre si il a été créé mais que rien n'a été chargé.
+Problème recherche mot ? Ne fonctionne pas ?
