@@ -270,6 +270,7 @@ void rechPhrase(ArbreBR arbre, char* str1, char* str2, char* nomfichier) {
 				 while(iter != NULL && iter->val != posmot1->numero_phrase) iter=iter->suiv;
 				 if(iter == NULL){
 				 		afficher_phrase(posmot1->numero_phrase,nomfichier);
+						printf("\n");
 						iter=init;
 						while(iter->suiv != NULL) iter=iter->suiv;
 						iter->suiv = malloc(sizeof(struct listeC));

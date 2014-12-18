@@ -111,6 +111,7 @@ int main()
 					break;
 				}
 				
+				printf("\e[1;1H\e[2J"); // Clear Terminal
 				afficher_arbre(*arbre);
 				choix=0;
 				break;
@@ -128,9 +129,10 @@ int main()
 				scanf("%s",nom);
 				noeud = rechercher_noeud(arbre,nom);
 				
-				if (noeud != NULL)
+				if (noeud != NULL) {
+					printf("\e[1;1H\e[2J"); // Clear Terminal
 					afficher_noeud(*noeud);
-				else {
+				} else {
 					printf("\e[1;1H\e[2J"); // Clear Terminal
 					printf("Le nœud n'a pas été trouvé !\n\n");
 				}
