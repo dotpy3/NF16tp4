@@ -91,6 +91,13 @@ int main()
 					break;
 				}
 				
+				if (arbre->racine == NULL){
+					printf("\e[1;1H\e[2J"); // Clear Terminal
+					printf("Aucun fichier n'a été chargé !\n\n");
+					choix = 0;
+					break;
+				}
+				
 				printf("\e[1;1H\e[2J"); // Clear Terminal
 				printf("Caractéristiques de l'arbre :\n\n");
 				printf("- Nombre de noeuds dans l'arbre : %d\n",nb_descendents(*(arbre->racine)));
