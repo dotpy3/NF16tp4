@@ -218,7 +218,6 @@ int equNoeud(NoeudABR noeud) {
 		else return 0;
 	} else {
 		int hG =hauteur(*(noeud.filsGauche)), hD = hauteur(*(noeud.filsDroit));
-		printf("Différence de hauteur entre le fils gauche et le fils droit de %s : %d\n",noeud.mot,hG - hD);
 		if ((hG - hD) >= -1 && (hG - hD) <= 1) return 1;
 		else return 0;
 	}
