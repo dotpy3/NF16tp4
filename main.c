@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "liste.h"
 #include "arbre.h"
 #include "outils.h"
-#include "outils.c"
+
 #include "liste.c"
+#include "outils.c"
 #include "arbre.c"
 
 int main()
@@ -211,6 +213,7 @@ int main()
 
 				break;
 		}
-	}while(choix>=0);
+	} while(choix>=0);
+	
 	return 0;
 }
