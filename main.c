@@ -18,9 +18,9 @@ int main()
 	char* nom2;
 	NoeudABR* noeud;
 	ArbreBR *arbre = NULL;
-	
+
 	printf("\e[1;1H\e[2J"); // Clear Terminal
-	
+
 	do {
 		switch(choix) {
 			/* choix a 9 valeurs possibles :
@@ -50,7 +50,7 @@ int main()
 				scanf("%d",&choix);
 				printf("\e[1;1H\e[2J"); // Clear Terminal
 				break;
-				
+
 			case 1:
 				// Création de l'arbre
 				if (arbre == NULL) arbre = creer_abr();
@@ -60,7 +60,7 @@ int main()
 				}
 				choix=0;
 				break;
-				
+
 			case 2:
 				// Chargement d'un fichier dans l'ABR
 				if (arbre == NULL) {
@@ -69,10 +69,10 @@ int main()
 					choix = 0;
 					break;
 				}
-				
+
 				printf("Quel fichier voulez-vous charger ?\n\n> ");
 				scanf("%s",nomfichier);
-				
+
 				if (charger_fichier(arbre,nomfichier) != 0) {
 					printf("\e[1;1H\e[2J"); // Clear Terminal
 					printf("Fichier chargé avec succès.\n\n");
@@ -80,10 +80,10 @@ int main()
 					printf("\e[1;1H\e[2J"); // Clear Terminal
 					printf("Échec lors du chargement du fichier !\n\n");
 				}
-				
+
 				choix = 0;
 				break;
-				
+
 			case 3:
 				// Affichage des caractéristiques de l'arbre
 				if (arbre == NULL) {
@@ -92,14 +92,14 @@ int main()
 					choix = 0;
 					break;
 				}
-				
+
 				if (arbre->racine == NULL){
 					printf("\e[1;1H\e[2J"); // Clear Terminal
 					printf("Aucun fichier n'a été chargé !\n\n");
 					choix = 0;
 					break;
 				}
-				
+
 				printf("\e[1;1H\e[2J"); // Clear Terminal
 				printf("Caractéristiques de l'arbre :\n\n");
 				printf("- Nombre de noeuds dans l'arbre : %d\n",nb_descendents(*(arbre->racine)));
@@ -110,7 +110,7 @@ int main()
 					printf("- L'arbre n'est pas équilibré.\n\n");
 				choix=0;
 				break;
-				
+
 			case 4:
 				// Affichage des mots par ordre alphabétique
 				if (arbre == NULL) {
@@ -119,7 +119,7 @@ int main()
 					choix = 0;
 					break;
 				}
-				
+
 				printf("\e[1;1H\e[2J"); // Clear Terminal
 				afficher_arbre(*arbre);
 				choix=0;
@@ -132,12 +132,13 @@ int main()
 					choix = 0;
 					break;
 				}
-				
+
 				printf("Quel mot voulez-vous rechercher ?\n\n> ");
+				free(nom);
 				nom = malloc(100*sizeof(char));
 				scanf("%s",nom);
 				noeud = rechercher_noeud(arbre,nom);
-				
+
 				if (noeud != NULL) {
 					printf("\e[1;1H\e[2J"); // Clear Terminal
 					afficher_noeud(*noeud);
@@ -145,7 +146,7 @@ int main()
 					printf("\e[1;1H\e[2J"); // Clear Terminal
 					printf("Le nœud n'a pas été trouvé !\n\n");
 				}
-				
+
 				choix=0;
 				break;
 			case 6:
@@ -158,10 +159,12 @@ int main()
 				}
 
 				printf("Quels mots voulez-vous rechercher ?\n\n> ");
+				free(nom);
+				free(nom2);
 				nom=malloc(100*sizeof(char));
 				nom2=malloc(100*sizeof(char));
 				scanf("%s%s",nom,nom2);
-				
+
 				printf("\e[1;1H\e[2J"); // Clear Terminal
 				rechPhrase(*arbre,nom,nom2,nomfichier);
 
@@ -205,7 +208,7 @@ int main()
 				}
 
 				supprimer_arbre(arbre);
-				
+
 				printf("\e[1;1H\e[2J"); // Clear Terminal
 				printf("L'arbre a bien été supprimé.\n\n");
 
@@ -214,6 +217,6 @@ int main()
 				break;
 		}
 	} while(choix>=0);
-	
+
 	return 0;
 }
