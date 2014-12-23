@@ -25,6 +25,7 @@ int charger_fichier(ArbreBR *arbre, char *filename) {
                 ajouter_noeud(arbre, mot, numLigne, ordreMot, numPhrase);
                 mot  = malloc(TAILLE_MOT*sizeof(char));
                 numPhrase++;
+				ordreMot++;
                 i = 0;
 				nbMots++;
             }
